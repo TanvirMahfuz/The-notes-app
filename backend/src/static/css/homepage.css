@@ -1,0 +1,108 @@
+@import url("https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap");
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css");
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Raleway", sans-serif;
+  transition: ease-in-out 250ms;
+}
+
+header nav {
+  padding: 20px;
+  background-color: aliceblue;
+}
+header nav ul {
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+}
+ul li {
+  text-align: center;
+  display: inline-block;
+  margin: 0px 5px;
+}
+ul li a {
+  text-decoration: none;
+  color: black;
+  padding: 10px;
+}
+
+#hero .container {
+  height: 30vh;
+  margin-top: 20px;
+  margin-bottom: 40px;
+  background-color: #555;
+  /* background-image: url("../images/pinknote.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: right; */
+}
+#hero .container h1 {
+  font-size: 80px;
+  outline: 5px;
+}
+#hero .container .t-text {
+  display: flex;
+}
+
+#hero .container .einstein {
+  outline: 5px;
+  height: 300px;
+  width: 300px;
+  margin-left: 88%;
+  margin-top: -5%;
+}
+/* #hero .container .feather {
+  outline: 5px;
+  height: 100px;
+  width: 100px;
+  margin-left: 50%;
+} */
+
+#text {
+  font-size: 5em;
+  color: #333;
+  color: white;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+#hero .container .img-div {
+  display: flex;
+  background-color: #333;
+  width: 100%;
+  height: 100%;
+  justify-content: right;
+}
+#hero .container .img-div img {
+  width: 50%;
+  height: 100%;
+  margin-right: 0;
+}
+main .container {
+  max-width: 70%;
+  margin: auto;
+  margin-bottom: 25px;
+  border: 1px solid black;
+  border-radius: 10px;
+  padding: 15px;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+main .container .title {
+  padding: 5px;
+}
+main .container .des {
+  padding: 5px;
+  max-height: 100px;
+  overflow: scroll;
+}
+.additional-info ul {
+  display: flex;
+  align-items: center;
+
+  padding: 3px;
+  padding: 5px;
+}
+
+.additional-info .a i {
+  font-size: 20px;
+}

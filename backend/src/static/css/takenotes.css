@@ -1,0 +1,131 @@
+@import url("https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap");
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css");
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Raleway", sans-serif;
+  transition: ease-in-out 250ms;
+}
+
+header nav {
+  padding: 20px;
+  background-color: aliceblue;
+}
+header nav ul {
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+}
+ul li {
+  text-align: center;
+  display: inline-block;
+  margin: 0px 5px;
+}
+ul li a {
+  text-decoration: none;
+  color: black;
+  padding: 10px;
+}
+
+main .container {
+  max-width: 70%;
+  margin: auto;
+  margin-top: 20px;
+  padding: 10px;
+  border: 1px solid;
+  border-radius: 10px;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+main .container form {
+  width: 100%;
+}
+main .container form .topic-in {
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+main .container .form #topic {
+  font-size: 16px;
+  border-style: none;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  font-weight: 400;
+  padding: 10px;
+  width: 90%;
+  outline: none;
+}
+main .container .form .desc {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+main .container .form #des {
+  font-size: 1em;
+  font-weight: 300;
+  padding: 10px;
+  margin: 15px;
+  margin-top: 10px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  width: 100%;
+  height: 50vh;
+  max-height: 80vh;
+  overflow: scroll;
+  outline: none;
+  resize: none;
+}
+
+main .container .form .upload {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+main .container .form .upload label {
+  margin-bottom: 5px;
+  border: 1px solid #ccc;
+  padding: 5px 30px;
+  border-radius: 5px;
+}
+main .container .form .upload label:hover {
+  color: white;
+  background: #333;
+}
+
+main .container .form .upload input {
+  display: none;
+}
+
+main .container .form .foot-foot {
+  width: 100%;
+  margin-top: 5px;
+
+  display: flex;
+  justify-content: right;
+  align-items: center;
+}
+main .container .form .foot-foot .btn {
+  border-radius: 10px;
+  padding: 5px;
+  margin-right: 15px;
+  width: 20%;
+  display: inherit;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #ddd;
+}
+main .container .form .foot-foot .btn:hover {
+  background-color: black;
+}
+main .container .form .foot-foot button {
+  font-size: 20px;
+  width: 100%;
+  background: none;
+  border: none;
+  color: #333;
+}
+main .container .form .foot-foot button:hover {
+  color: white;
+}

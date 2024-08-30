@@ -1,0 +1,155 @@
+@import url("https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap");
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css");
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Raleway", sans-serif;
+  transition: ease-in-out 250ms;
+}
+
+header nav {
+  padding: 20px;
+  background-color: aliceblue;
+}
+header nav ul {
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+}
+ul li {
+  text-align: center;
+  display: inline-block;
+  margin: 0px 5px;
+}
+ul li a {
+  text-decoration: none;
+  color: black;
+  padding: 10px;
+}
+#hero .container {
+  height: 30vh;
+  margin-top: 20px;
+  margin-bottom: 40px;
+  background-color: #8cbc6e;
+}
+#hero .container .t-text {
+  display: flex;
+}
+
+#hero .container .einstein {
+  outline: 5px;
+  height: 220px;
+  width: 220px;
+  margin-left: 90%;
+  margin-top: 0%;
+}
+/* #hero .container .feather {
+  outline: 5px;
+  height: 100px;
+  width: 100px;
+  margin-left: 50%;
+} */
+#text {
+  font-size: 5em;
+  color: #333;
+  color: white;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+main {
+  margin-bottom: 10px;
+}
+main .container {
+  max-width: 70%;
+  margin: auto;
+  margin-bottom: 20px;
+  border: 1px solid black;
+  border-radius: 10px;
+  padding: 10px;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+main .container .title {
+  padding: 5px;
+}
+main .container .threads {
+  margin-left: 2%;
+  max-height: 200px;
+  overflow: scroll;
+}
+
+main .container .comments {
+  margin-left: 2%;
+  max-height: 200px;
+  overflow: scroll;
+}
+main .container .comments h4 {
+  font-weight: 500;
+  color: #555454;
+}
+main .container .comments p {
+  font-weight: 400;
+  font-size: 14px;
+  color: #686666;
+}
+main .container .judgment {
+  margin-left: 2%;
+  margin-right: 2%;
+  max-height: 200px;
+  overflow: scroll;
+}
+
+main .container .judgment form p {
+  font-weight: 400;
+}
+main .container .judgment .reactions {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+main .container .judgment .reactions .left {
+  width: 90%;
+  text-align: center;
+}
+main .container .judgment .reactions .right {
+  width: 10%;
+  display: flex;
+  justify-content: center;
+}
+main .container .judgment .reactions #comment {
+  padding: 10px;
+  background-color: white;
+  border: 1px solid #ddd;
+  margin-top: 10px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  width: 100%;
+}
+
+main .container .judgment .reactions textarea {
+  font-size: 14px;
+  resize: none;
+  outline: none;
+}
+main .container .judgment .reactions .circle {
+  height: 45px;
+  width: 45px;
+  border-radius: 50%;
+  display: inherit;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid black;
+  transition: ease-in-out 250ms;
+}
+
+main .container .judgment .reactions .circle:hover {
+  background-color: black;
+}
+main .container .judgment .reactions .circle i:hover {
+  color: white;
+}
+main .container .judgment .reactions button {
+  font-size: 35px;
+  background: none;
+  border: none;
+}

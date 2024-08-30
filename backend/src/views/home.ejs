@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/homepage.css" />
+    <link
+      rel="stylesheet"
+      href="/css/font-awesome-4.7.0/css/font-awesome.min.css"
+    />
+    <title>The notes APP</title>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <ul>
+          <div class="right">
+            <li><a href="" class="na-item">Home</a></li>
+            <li><a href="" class="na-item">tab1</a></li>
+            <li>
+              <a href="/api/notes/discussion" class="na-item">Discussion</a>
+            </li>
+            <li><a href="" class="na-item">Notes Database</a></li>
+          </div>
+          <div class="left">
+            <li>
+              <a href="/api/notes/new-note" class="na-item"
+                ><i class="bi bi-file-earmark-plus-fill"></i> take note</a
+              >
+            </li>
+            <li><a href="profile" class="na-item">Profile</a></li>
+          </div>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <section id="hero">
+        <div class="container">
+          <div class="t-text">
+            <h1 id="text">The Notes APP</h1>
+            <img
+              src="/images/feather-8290037_1280.png"
+              alt=""
+              height="100"
+              width="100"
+            />
+          </div>
+
+          <img
+            src="/images/albert-einstein-8228950_1280.png"
+            alt=""
+            class="einstein"
+          />
+        </div>
+      </section>
+
+      <% for (let note of data) { %>
+      <div class="container">
+        <div class="title">
+          <h2><a href="/api/notes/<%=note.name %>"><%= note.name %></a></h2>
+        </div>
+        <div class="des"><%= note.description %></div>
+        <div class="additional-info">
+          <ul>
+            <li>
+              <a
+                href="https://www.youtube.com/results?search_query=<%=note.name %>"
+                >YouTube <i class="bi bi-youtube"></i
+              ></a>
+            </li>
+            <li>
+              <a
+                href="/images/Risk factors predicting of CKD.pdf"
+                target="_blank"
+                >pdf <i class="bi bi-file-earmark-pdf-fill"></i
+              ></a>
+            </li>
+            <li>
+              <a href="discussion.html"
+                >Discussion <i class="bi bi-chat-dots-fill"></i
+              ></a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <% } %>
+    </main>
+    <footer></footer>
+  </body>
+</html>
