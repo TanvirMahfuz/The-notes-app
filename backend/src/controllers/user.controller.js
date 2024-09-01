@@ -1,5 +1,11 @@
 const User = require("../models/user.model.js");
 const jwt = require("jsonwebtoken");
+
+const profileView = async (req, res) => {
+  console.log(req.user);
+  return res.render("profile", {user: req.user});
+};
+
 const register = async (req, res) => {
   const {name, email, password} = req.body;
   const user = new User({name, email, password});
@@ -54,4 +60,4 @@ const logOut = async (req, res) => {
   res.clearCookie("privateKey");
   return res.redirect("/api/home");
 };
-module.exports = {logIn, register, logOut};
+module.exports = {logIn, register, logOut, profileView};

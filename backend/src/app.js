@@ -1,10 +1,17 @@
 express = require("express");
 const path = require("path");
 const cookieParser = require("cookie-parser");
+const {isLoggedIn} = require("./middlewares/auth.middleware.js");
 app = express();
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(cookieParser());
+
+const storage = {
+  destination: (req, file, cb) => {
+    cb(null, path.join(__dirname, "static/images"));
+  },
+};
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname + "/views"));

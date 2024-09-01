@@ -5,7 +5,7 @@ const storeComment = async (req, res) => {
     {
       $push: {
         comments: {
-          commenterName: "jackell",
+          commenterName: req.user.name,
           comment: req.body.comment,
         },
       },
