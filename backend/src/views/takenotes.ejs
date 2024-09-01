@@ -15,10 +15,11 @@
     <main>
       <div class="container">
         <form
-          action="/api/takenotes"
+          action="/api/notes/new-note"
           class="form"
           method="post"
           name="topicform"
+          enctype="multipart/form-data"
         >
           <div class="topic-in">
             <p>Topic <i class="bi bi-lightbulb"></i>:</p>
@@ -27,13 +28,15 @@
           <br />
 
           <label for="desc">Description:</label>
-          <div class="desc"><textarea name="des" id="des"></textarea></div>
+          <div class="desc">
+            <textarea name="description" id="des"></textarea>
+          </div>
 
           <div class="upload">
             <label for="doc" class="doc"
               >Upload PDF <i class="bi bi-file-earmark-pdf"></i>
             </label>
-            <input type="file" id="doc" name="pdf" />
+            <input type="file" id="doc" name="doc" />
           </div>
           <div class="foot-foot">
             <div class="btn">

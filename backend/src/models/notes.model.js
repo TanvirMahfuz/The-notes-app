@@ -25,6 +25,9 @@ const NotesSchema = new mongoose.Schema({
       },
     },
   ],
+  attachedPdf: {
+    type: String,
+  },
 });
 
 // Create the Topic model

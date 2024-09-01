@@ -94,9 +94,9 @@ main .container .form .upload label:hover {
   background: #333;
 }
 
-main .container .form .upload input {
+/* main .container .form .upload input {
   display: none;
-}
+} */
 
 main .container .form .foot-foot {
   width: 100%;

@@ -1,0 +1,22 @@
+const multer = require("multer");
+const path = require("path");
+const pdfStorage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, path.join(__dirname, "../static/pdf"));
+  },
+  filename: function (req, file, cb) {
+    cb(null, req.user._id + "-" + file.originalname);
+  },
+});
+const imgStorage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, path.join(__dirname, "../static/images"));
+  },
+  filename: function (req, file, cb) {
+    cb(null, req.user._id + "-" + file.originalname);
+  },
+});
+module.exports = {
+  pdfUpload: multer({storage: pdfStorage}).single("doc"),
+  imageUpload: multer({storage: imgStorage}).single("img"),
+};

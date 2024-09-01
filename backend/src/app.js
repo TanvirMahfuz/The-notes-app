@@ -7,12 +7,6 @@ app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(cookieParser());
 
-const storage = {
-  destination: (req, file, cb) => {
-    cb(null, path.join(__dirname, "static/images"));
-  },
-};
-
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname + "/views"));
 
