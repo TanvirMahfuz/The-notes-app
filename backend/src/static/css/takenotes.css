@@ -94,9 +94,25 @@ main .container .form .upload label:hover {
   background: #333;
 }
 
-/* main .container .form .upload input {
-  display: none;
-} */
+main .container .form .upload input {
+  /* display: none; */
+  background: none;
+}
+::-webkit-file-upload-button {
+  margin-bottom: 5px;
+  border: 1px solid #ccc;
+  padding: 5px 30px;
+  border-radius: 5px;
+  transition: all 0.3s ease-in-out;
+  background-color: white;
+  font-size: 16px;
+  font-weight: 400;
+  color: #333;
+}
+::-webkit-file-upload-button:hover {
+  color: white;
+  background: #333;
+}
 
 main .container .form .foot-foot {
   width: 100%;

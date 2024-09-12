@@ -1,9 +1,9 @@
 const Notes = require("../models/notes.model");
 
-const createNote = async (topic, description, fileName) => {
+const createNote = async (email, topic, description, fileName) => {
   const note = {
     name: topic,
-    publisher: req.user.email,
+    publisher: email,
     description: description?.length > 0 ? description : "No description",
     comments: [],
     attachedPdf: fileName,
@@ -12,7 +12,7 @@ const createNote = async (topic, description, fileName) => {
 };
 const getNote = async (noteId) => {};
 const storeComment = async (noteId, comment) => {
-  return (note = await Notes.findByIdAndUpdate(
+  return await Notes.findByIdAndUpdate(
     noteId,
     {
       $push: {
@@ -22,7 +22,7 @@ const storeComment = async (noteId, comment) => {
       },
     },
     {new: true}
-  ));
+  );
 };
 module.exports = {
   createNote,

@@ -7,14 +7,19 @@
       rel="stylesheet"
       href="/css/font-awesome-4.7.0/css/font-awesome.min.css"
     />
-    <link rel="stylesheet" href="/css/login.css" />
-    <title>Log In</title>
+    <link rel="stylesheet" href="/css/signUp.css" />
+    <title>Register</title>
   </head>
   <body>
-    <div class="container">
-      <div class="title"><h1>Log In</h1></div>
+    <div class="container" style="height: 80vh">
+      <div class="title"><h1>Register</h1></div>
 
-      <form action="/api/user/log-in" method="post" class="form">
+      <form action="/api/user/register" method="post" class="form">
+        <div class="form-item">
+          <label for="name">Name : </label>
+          <input type="text" id="name" name="name" />
+        </div>
+
         <div class="form-item">
           <label for="email">email : </label>
           <input type="text" id="email" name="email" />
@@ -35,17 +40,43 @@
           </div>
         </div>
 
-        <button type="submit" class="btn-submit">log in</button>
+        <div class="form-item">
+          <label for="confirmPassword">confirm</label>
+          <div class="inputbox">
+            <input
+              type="password"
+              id="confirmPassword"
+              name="confirmPassword"
+              style="width: 85%"
+            />
+            <button type="button" id="togglePassword">
+              <i class="bi bi-eye-slash-fill"></i>
+            </button>
+          </div>
+        </div>
+        <button type="submit" class="btn-submit" style="margin-bottom: 40px">
+          register
+        </button>
       </form>
       <div class="signup-link">
-        do not have an account yet ? <a href="/api/user/register">Register</a>
+        do not have an account yet ?    <a href="/api/user/log-in">sign up</a>
       </div>
       </div>
       <script>
         const passwordInput = document.getElementById("password");
+        const confirmPasswordInput = document.getElementById("confirmPassword");
         const togglePasswordButton = document.getElementById("togglePassword");
 
         togglePasswordButton.addEventListener("click", () => {
+          const type = passwordInput.type === "password" ? "text" : "password";
+          passwordInput.type = type;
+          // Toggle icon class
+          togglePasswordButton.innerHTML =
+            type === "password"
+              ? '<i class="bi bi-eye-slash-fill"></i>'
+              : '<i class="bi bi-eye-fill"></i>';
+        });
+        confirmPasswordInput.addEventListener("click", () => {
           const type = passwordInput.type === "password" ? "text" : "password";
           passwordInput.type = type;
           // Toggle icon class

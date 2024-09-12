@@ -23,7 +23,7 @@
         >
           <div class="topic-in">
             <p>Topic <i class="bi bi-lightbulb"></i>:</p>
-            <input type="text" id="topic" name="topic" />
+            <input type="text" id="topic" name="topic" required />
           </div>
           <br />
 
@@ -33,10 +33,10 @@
           </div>
 
           <div class="upload">
-            <label for="doc" class="doc"
+            <!-- <label for="doc" class="doc"
               >Upload PDF <i class="bi bi-file-earmark-pdf"></i>
-            </label>
-            <input type="file" id="doc" name="doc" />
+            </label> -->
+            <input type="file" id="doc" name="doc" required />
           </div>
           <div class="foot-foot">
             <div class="btn">
@@ -52,37 +52,3 @@
     <footer></footer>
   </body>
 </html>
-<!-- <script>
-      document
-        .getElementById("form")
-        .addEventListener("submit", function (event) {
-          event.preventDefault(); // Prevent the form from submitting normally
-
-          // Get form data
-          const formData = new FormData(this);
-
-          // Send form data to the backend using Axios
-          axios
-            .post("/api/takenotes", formData)
-            .then((response) => {
-              window.location.reload();
-            })
-            .catch((error) => {
-              console.error("Error:", error);
-              // Handle error if needed
-            });
-        });
-    </script> -->
-<!-- 
-
-  
-
-  data = {
-    t1:"dkajsalk"
-  }
-
-
- model ={
-  name: type(string)
- }
- -->

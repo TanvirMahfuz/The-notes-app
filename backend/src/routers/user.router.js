@@ -14,4 +14,7 @@ userRouter.get("/log-in", (req, res) => {
 userRouter.post("/log-in", logIn);
 userRouter.get("/log-out", isLoggedIn, logOut);
 userRouter.post("/register", register);
+userRouter.get("/register", (req, res) => {
+  res.render("register");
+});
 module.exports = userRouter;
