@@ -1,7 +1,7 @@
 const {Router} = require("express");
 const notesRouter = Router();
 const Notes = require("../models/notes.model");
-const {isLoggedIn} = require("../middlewares/auth.middleware.js");
+const {isOwner} = require("../middlewares/auth.middleware.js");
 const {pdfUpload, imageUpload} = require("../middlewares/multer.middleware.js");
 const {
   storeComment,
@@ -17,7 +17,7 @@ notesRouter.get("/new-note", (req, res) => {
 });
 notesRouter.post("/new-note", pdfUpload, createNote);
 notesRouter.get("/edit-page", getEditPage);
-notesRouter.post("/edit-page", updateNote);
+notesRouter.post("/edit-page", pdfUpload, updateNote);
 notesRouter.get("/:name", getNote);
 
 module.exports = notesRouter;

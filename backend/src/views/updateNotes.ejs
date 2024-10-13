@@ -67,23 +67,23 @@
 
     <footer>
       <script>
-        // Function to escape newlines in a JSON string
-        function escapeNewlines(jsonString) {
-            return jsonString.replace(/[\r\n]+/g, "\\n");
-        }
+                // Function to escape newlines in a JSON string
+                function escapeNewlines(jsonString) {
+                    return jsonString.replace(/[\r\n]+/g, "\\n");
+                }
 
-        const formEl = document.getElementById("formEl");
-        const docEl = document.getElementById("doc");
-        const fileLabel = document.getElementById("fileLabel");
+                const formEl = document.getElementById("formEl");
+                const docEl = document.getElementById("doc");
+                const fileLabel = document.getElementById("fileLabel");
 
-        // Update file label when a new file is selected
-        docEl.addEventListener("change", (e) => {
-            const file = e.target.files[0];
-            fileLabel.innerText = file ? `Selected file: ${file.name}` : "Upload PDF"; // Reset label if no file is selected
-        });
+                // Update file label when a new file is selected
+                docEl.addEventListener("change", (e) => {
+                    const file = e.target.files[0];
+                    fileLabel.innerText = file ? `Selected file: ${file.name}` : "Upload PDF"; // Reset label if no file is selected
+                });
 
-        // Handle form submission
-        formEl.addEventListener("submit",async (e) => {
+                // Handle form submission
+                formEl.addEventListener("submit", async (e) => {
             e.preventDefault();
 
             // Collect form data
@@ -93,25 +93,35 @@
 
             // Deleting unchanged properties
             if (data.topic === preNote.name) delete data.topic;
-            if (escapeNewlines(data.description)==escapeNewlines(preNote.description)) delete data.description;
+            if (escapeNewlines(data.description) === escapeNewlines(preNote.description)) delete data.description;
             if (data.doc.name === preNote.attachedPdf || !data.doc.name) delete data.doc;
-            if(Object.keys(data).length === 0) window.location.reload();
-            data._id = preNote._id;
 
-            console.log("Data to submit:", data);
+            // If no data to submit, reload the page
+            if (Object.keys(data).length === 0) {
+                window.location.reload();
+                return; // Exit the function to avoid further execution
+            }
+        data.id = preNote._id;
+            // Prepare the data to be sent to the server
+            const requestData = new FormData(); // Use FormData to handle file uploads
+            for (const key in data) {
+                // Append each key-value pair to FormData
+                if (data[key] !== undefined) {
+                    requestData.append(key, data[key]);
+                }
+            }
+
+            console.log("Data to submit:", requestData);
 
             // Send data to the server
             fetch("/api/notes/edit-page", {
                 method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(data),
+                body: requestData, // Use FormData directly
             })
                 .then((response) => response.json())
                 .then((data) => {
                     console.log("Response data:", data);
-                    window.location.reload();
+
                 })
                 .catch((error) => {
                     console.error("Error:", error);

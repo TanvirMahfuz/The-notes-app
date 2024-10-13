@@ -25,7 +25,8 @@ const storeComment = async (noteId, comment) => {
   );
 };
 
-const updateOneNote = async (data) => {
+const updateOneNote = async (req) => {
+  data = req.body;
   try {
     const updatedNote = {
       name: data.name && data.name.length > 0 ? data.name : null,
@@ -33,14 +34,18 @@ const updateOneNote = async (data) => {
         data.description && data.description.length > 0
           ? data.description
           : null,
+      attachedPdf: req.file?.filename,
     };
+
     for (const key in updatedNote) {
       if (updatedNote[key] === null) {
         delete updatedNote[key];
       }
     }
     console.log(updatedNote);
-    const newNote = await Notes.findByIdAndUpdate(data._id, updatedNote, {
+
+    console.log(data.id);
+    const newNote = await Notes.findByIdAndUpdate(data.id, updatedNote, {
       new: true,
     });
     if (!newNote) return null;

@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
 const User = require("../models/user.model.js");
-
+const Notes = require("../models/notes.model.js");
 const isLoggedIn = async (req, res, next) => {
   const accToken = req.cookies["publicKey"];
   const refToken = req.cookies["privateKey"];
@@ -63,5 +63,18 @@ const isLoggedIn = async (req, res, next) => {
     return res.status(401).redirect("/api/user/register");
   }
 };
+const isOwner = async (req, res, next) => {
+  console.log(req.body);
+  let params = req.query.id;
+  if (params === undefined) params = req.body.id;
 
-module.exports = {isLoggedIn};
+  const note = await Notes.findOne({_id: params});
+
+  if (!note)
+    return res.status(404).json({message: "middleware error: note not found"});
+  if (note.publisher !== req.user.email) {
+    return res.status(401).json({message: "unauthorized"});
+  }
+  next();
+};
+module.exports = {isLoggedIn, isOwner};

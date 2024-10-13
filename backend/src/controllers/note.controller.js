@@ -29,7 +29,6 @@ const createNote = async (req, res) => {
   try {
     const {topic, description} = req.body;
     const fileName = req.file?.filename;
-    console.log(req.file.filename);
     const newNote = await createNote(
       req.user.email,
       topic,
@@ -51,7 +50,7 @@ const createNote = async (req, res) => {
   }
 };
 const updateNote = async (req, res) => {
-  const updatedNote = await updateOneNote(req.body);
+  const updatedNote = await updateOneNote(req);
   if (!updatedNote) return res.status(404).json({msg: "note not found"});
   console.log(updatedNote);
   return res.status(200).json({msg: "user updated successfully"});
@@ -63,7 +62,6 @@ const getEditPage = async (req, res) => {
     if (!note) {
       return res.status(404).json({message: "Note not found"});
     }
-    console.log(note);
 
     // Pass the note to the EJS template
     return res.render("updateNotes", {note: note});

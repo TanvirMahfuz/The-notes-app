@@ -1,7 +1,9 @@
 const multer = require("multer");
 const path = require("path");
+
 const pdfStorage = multer.diskStorage({
   destination: function (req, file, cb) {
+    console.log("Middleware reached");
     cb(null, path.join(__dirname, "../static/pdf"));
   },
   filename: function (req, file, cb) {
