@@ -20,6 +20,40 @@
           </div>
         </div>
       </section>
+
+      <section class="publications-container">
+        <div class="container">
+          <% for (let note of notes){%>
+          <div class="card">
+            <h1 style="height: 20%">
+              <a href="/api/notes/<%=note.name %>"><%= note.name %></a>
+            </h1>
+            <div class="description">
+              <p><%= note.description%></p>
+            </div>
+            <div class="btns">
+              <button type="submit" onclick="updateClicked('<%= note._id %>')">
+                update
+              </button>
+              <button type="submit">delete</button>
+            </div>
+          </div>
+          <% } %>
+        </div>
+      </section>
     </main>
+
+    <script>
+      function escapeNewlines(jsonString) {
+        return jsonString.replace(/[\r\n]+/g, "\\n");
+      }
+      async function updateClicked(id) {
+        try {
+          window.location.href = "/api/notes/edit-page?id=" + id;
+        } catch (error) {
+          console.error("Error parsing JSON:", error);
+        }
+      }
+    </script>
   </body>
 </html>

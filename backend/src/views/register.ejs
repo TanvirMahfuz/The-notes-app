@@ -22,7 +22,7 @@
 
         <div class="form-item">
           <label for="email">email : </label>
-          <input type="text" id="email" name="email" />
+          <input type="email" id="email" name="email" />
         </div>
 
         <div class="form-item">
@@ -34,7 +34,7 @@
               name="password"
               style="width: 85%"
             />
-            <button type="button" id="togglePassword">
+            <button type="button" id="togglePassword1">
               <i class="bi bi-eye-slash-fill"></i>
             </button>
           </div>
@@ -49,7 +49,7 @@
               name="confirmPassword"
               style="width: 85%"
             />
-            <button type="button" id="togglePassword">
+            <button type="button" id="togglePassword2">
               <i class="bi bi-eye-slash-fill"></i>
             </button>
           </div>
@@ -65,22 +65,23 @@
       <script>
         const passwordInput = document.getElementById("password");
         const confirmPasswordInput = document.getElementById("confirmPassword");
-        const togglePasswordButton = document.getElementById("togglePassword");
+        const togglePasswordButton1 = document.getElementById("togglePassword1");
+        const togglePasswordButton2 = document.getElementById("togglePassword2");
 
-        togglePasswordButton.addEventListener("click", () => {
+        togglePasswordButton1.addEventListener("click", () => {
           const type = passwordInput.type === "password" ? "text" : "password";
           passwordInput.type = type;
           // Toggle icon class
-          togglePasswordButton.innerHTML =
+          togglePasswordButton1.innerHTML =
             type === "password"
               ? '<i class="bi bi-eye-slash-fill"></i>'
               : '<i class="bi bi-eye-fill"></i>';
         });
-        confirmPasswordInput.addEventListener("click", () => {
-          const type = passwordInput.type === "password" ? "text" : "password";
-          passwordInput.type = type;
+        togglePasswordButton2.addEventListener("click", () => {
+          const type = confirmPasswordInput.type === "password" ? "text" : "password";
+          confirmPasswordInput.type = type;
           // Toggle icon class
-          togglePasswordButton.innerHTML =
+          togglePasswordButton2.innerHTML =
             type === "password"
               ? '<i class="bi bi-eye-slash-fill"></i>'
               : '<i class="bi bi-eye-fill"></i>';

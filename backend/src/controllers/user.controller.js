@@ -1,9 +1,14 @@
 const User = require("../models/user.model.js");
 const jwt = require("jsonwebtoken");
-
+const Notes = require("../models/notes.model.js");
 const profileView = async (req, res) => {
-  console.log(req.user);
-  return res.render("profile", {user: req.user});
+  let notes = [];
+  try {
+    notes = await Notes.find({_id: {$in: req.user.notes}});
+  } catch (error) {
+    console.error(error.message);
+  }
+  return res.render("profile", {user: req.user, notes});
 };
 
 const register = async (req, res) => {

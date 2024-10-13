@@ -1,6 +1,7 @@
 const Notes = require("../models/notes.model");
 const path = require("path");
 const {updateUserNote} = require("../service/user.service.js");
+const {updateOneNote} = require("../service/notes.service.js");
 
 const storeComment = async (req, res) => {
   const {storeComment} = require("../service/notes.service.js");
@@ -49,4 +50,27 @@ const createNote = async (req, res) => {
     return res.status(500).json({message: "internal server error"});
   }
 };
-module.exports = {storeComment, getNote, createNote};
+const updateNote = async (req, res) => {
+  const updatedNote = await updateOneNote(req.body);
+  if (!updatedNote) return res.status(404).json({msg: "note not found"});
+  console.log(updatedNote);
+  return res.status(200).json({msg: "user updated successfully"});
+};
+
+const getEditPage = async (req, res) => {
+  try {
+    const note = await Notes.findOne({_id: req.query.id});
+    if (!note) {
+      return res.status(404).json({message: "Note not found"});
+    }
+    console.log(note);
+
+    // Pass the note to the EJS template
+    return res.render("updateNotes", {note: note});
+  } catch (error) {
+    console.error("Error fetching note:", error);
+    return res.status(500).json({message: "Server error"});
+  }
+};
+
+module.exports = {storeComment, getNote, createNote, updateNote, getEditPage};

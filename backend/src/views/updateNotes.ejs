@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/takenotes.css" />
+    <link
+      rel="stylesheet"
+      href="/css/font-awesome-4.7.0/css/font-awesome.min.css"
+    />
+    <title>The Notes APP</title>
+  </head>
+  <body>
+    <%- include("includes/nav.ejs") %>
+    <main>
+      <div class="container">
+        <form
+          id="formEl"
+          class="form"
+          method="post"
+          name="topicform"
+          enctype="multipart/form-data"
+        >
+          <!-- Topic Section -->
+          <div class="topic-in">
+            <p>Topic <i class="bi bi-lightbulb"></i>:</p>
+            <input
+              type="text"
+              id="topic"
+              name="topic"
+              value="<%= note.name %>"
+              required
+            />
+          </div>
+          <br />
+
+          <!-- Description Section -->
+          <label for="desc">Description:</label>
+          <div class="desc">
+            <textarea name="description" id="des" required>
+<%= note.description %></textarea
+            >
+          </div>
+
+          <!-- File Upload Section -->
+          <div class="upload">
+            <label for="doc">Upload PDF</label>
+            <p id="fileLabel" style="margin-left: 5px">
+              <%= note.attachedPdf %>
+            </p>
+
+            <input type="file" name="doc" id="doc" style="display: none" />
+          </div>
+
+          <!-- Submit Button -->
+          <div class="foot-foot">
+            <div class="btn">
+              <button type="submit" class="wait-btn">
+                Submit
+                <i class="bi bi-cloud-arrow-up"></i>
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </main>
+
+    <footer>
+      <script>
+        // Function to escape newlines in a JSON string
+        function escapeNewlines(jsonString) {
+            return jsonString.replace(/[\r\n]+/g, "\\n");
+        }
+
+        const formEl = document.getElementById("formEl");
+        const docEl = document.getElementById("doc");
+        const fileLabel = document.getElementById("fileLabel");
+
+        // Update file label when a new file is selected
+        docEl.addEventListener("change", (e) => {
+            const file = e.target.files[0];
+            fileLabel.innerText = file ? `Selected file: ${file.name}` : "Upload PDF"; // Reset label if no file is selected
+        });
+
+        // Handle form submission
+        formEl.addEventListener("submit",async (e) => {
+            e.preventDefault();
+
+            // Collect form data
+            const formData = new FormData(formEl);
+            const preNote = <%- JSON.stringify(note) %>; // Predefined note data
+            const data = Object.fromEntries(formData);
+
+            // Deleting unchanged properties
+            if (data.topic === preNote.name) delete data.topic;
+            if (escapeNewlines(data.description)==escapeNewlines(preNote.description)) delete data.description;
+            if (data.doc.name === preNote.attachedPdf || !data.doc.name) delete data.doc;
+            if(Object.keys(data).length === 0) window.location.reload();
+            data._id = preNote._id;
+
+            console.log("Data to submit:", data);
+
+            // Send data to the server
+            fetch("/api/notes/edit-page", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(data),
+            })
+                .then((response) => response.json())
+                .then((data) => {
+                    console.log("Response data:", data);
+                    window.location.reload();
+                })
+                .catch((error) => {
+                    console.error("Error:", error);
+                });
+        });
+      </script>
+    </footer>
+  </body>
+</html>
