@@ -7,6 +7,7 @@ const {
   profileView,
 } = require("../controllers/user.controller.js");
 const {isLoggedIn} = require("../middlewares/auth.middleware.js");
+
 userRouter.get("/", isLoggedIn, profileView);
 userRouter.get("/log-in", (req, res) => {
   res.render("logIn");
@@ -17,4 +18,5 @@ userRouter.post("/register", register);
 userRouter.get("/register", (req, res) => {
   res.render("register");
 });
+userRouter.get("/profileView", isLoggedIn);
 module.exports = userRouter;

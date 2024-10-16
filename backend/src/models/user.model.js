@@ -33,20 +33,23 @@ userSchema.pre("save", async function (next) {
   }
   const salt = await bcrypt.genSalt(10);
   this.password = await bcrypt.hash(this.password, salt);
-  this.refToken = await this.generateRefreshToken();
   next();
 });
 userSchema.methods.generateRefreshToken = async function () {
-  return await jwt.sign({email: this.email}, "the secret of victor", {
-    expiresIn: "30d",
-  });
+  this.refToken = await jwt.sign(
+    {email: this.email},
+    process.env.REFRESH_TOKEN_SECRET,
+    {
+      expiresIn: process.env.REFRESH_TOKEN_EXPIRE_TIME,
+    }
+  );
 };
 userSchema.methods.generateAccessToken = async function () {
   return await jwt.sign(
     {name: this.name, email: this.email},
-    "the secret of frankenstein",
+    process.env.ACCESS_TOKEN_SECRET,
     {
-      expiresIn: "1d",
+      expiresIn: process.env.ACCESS_TOKEN_EXPIRE_TIME,
     }
   );
 };

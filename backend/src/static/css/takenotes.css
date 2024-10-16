@@ -8,32 +8,12 @@
   transition: ease-in-out 250ms;
 }
 
-header nav {
-  padding: 20px;
-  background-color: aliceblue;
-}
-header nav ul {
-  list-style: none;
-  display: flex;
-  justify-content: space-between;
-}
-ul li {
-  text-align: center;
-  display: inline-block;
-  margin: 0px 5px;
-}
-ul li a {
-  text-decoration: none;
-  color: black;
-  padding: 10px;
-}
-
 main .container {
   max-width: 70%;
   margin: auto;
   margin-top: 20px;
   padding: 10px;
-  border: 1px solid;
+  border: 1px solid #333;
   border-radius: 10px;
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
 }

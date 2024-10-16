@@ -1,68 +1,75 @@
 const jwt = require("jsonwebtoken");
 const User = require("../models/user.model.js");
 const Notes = require("../models/notes.model.js");
+
 const isLoggedIn = async (req, res, next) => {
+  console.log("middleware reached");
   const accToken = req.cookies["publicKey"];
-  const refToken = req.cookies["privateKey"];
 
   if (!accToken) {
-    if (!refToken) {
-      return res.redirect("/api/user/log-in");
-    } else {
-      try {
-        console.log("refreshing public key");
-        const decoded = await jwt.verify(refToken, "the secret of victor");
-        console.log(decoded);
-        if (!decoded) {
-          return res.status(401).json({message: "Invalid refresh token"});
-        }
-        const user = await User.findOne({email: decoded.email});
-
-        if (!user) {
-          return res.status(401).json({message: "Invalid refresh token"});
-        }
-
-        const newAccToken = jwt.sign(
-          {id: user._id, email: user.email},
-          "the secret of frankenstein",
-          {expiresIn: "1d"}
-        );
-
-        res.cookie("publicKey", newAccToken);
-
-        req.user = user;
-        return next();
-      } catch (error) {
-        console.log("refToken" + error.message);
-
-        return res.redirect("/api/user/log-in");
-      }
-    }
+    console.log("No access token provided");
+    return res.status(401).redirect("/api/user/log-in");
   }
 
+  let tem = await jwt.verify(accToken, process.env.ACCESS_TOKEN_SECRET);
+  console.log("tem:", tem);
+
+  const decoded = await jwt.verify(accToken, process.env.ACCESS_TOKEN_SECRET);
+  const currentTime = Date.now();
+  const tokenExpiration = decoded ? decoded.exp * 1000 : 0;
   try {
-    const decoded = jwt.decode(accToken);
-    if (decoded.exp * 1000 < Date.now()) {
-      console.log("Token expired");
-      res.clearCookie("publicKey");
+    if (!decoded || tokenExpiration < currentTime) {
+      console.log("Token expired or invalid");
       res.clearCookie("privateKey");
       return res.status(401).redirect("/api/user/log-in");
     }
+    console.log(tokenExpiration - currentTime);
 
-    // If not expired, proceed with verification
-    jwt.verify(accToken, "the secret of frankenstein");
-    console.log("decoded after verify", decoded);
-    const user = await User.findOne({email: decoded.email});
-    if (!user) {
+    if (tokenExpiration - currentTime < 30 * 60 * 1000) {
+      const user = await User.findOne({email: decoded.email});
+      if (!user) {
+        console.log("Invalid refresh token or user not found");
+        return res.status(401).redirect("/api/user/log-in");
+      }
+      if (user.refToken !== "") {
+        try {
+          const ver = await jwt.verify(
+            user.refToken,
+            process.env.REFRESH_TOKEN_SECRET
+          );
+          const newAccToken = user.generateAccessToken();
+          user.refToken = user.generateRefreshToken();
+          res.cookie("publicKey", newAccToken, {httpOnly: true});
+          console.log("New access token issued");
+        } catch (error) {
+          console.log("Error:", error.message);
+          res.redirect("/api/user/log-in");
+        }
+      } else {
+        console.log("No refresh token found");
+        return res.status(401).redirect("/api/user/log-in");
+      }
+    }
+
+    const verifiedDecoded = jwt.verify(
+      accToken,
+      process.env.ACCESS_TOKEN_SECRET
+    );
+
+    const userExists = await User.findOne({email: verifiedDecoded.email});
+    if (!userExists) {
+      console.log("User not found");
       return res.status(401).redirect("/api/user/register");
     }
-    req.user = user;
+
+    req.user = userExists;
     next();
-  } catch (error) {
-    console.log("accToken error:", error.message);
+  } catch (err) {
+    console.log("Error:", err.message);
     return res.status(401).redirect("/api/user/register");
   }
 };
+
 const isOwner = async (req, res, next) => {
   console.log(req.body);
   let params = req.query.id;

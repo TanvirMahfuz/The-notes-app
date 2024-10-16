@@ -9,36 +9,88 @@
       integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="/css/profile.css" />
     <title>Profile</title>
-    <style></style>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap");
+      @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css");
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family: "Raleway", sans-serif;
+        transition: ease-in-out 250ms;
+      }
+
+      main .hero .container .img-details {
+        width: 60%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+      main .hero .container .img-details h4 {
+        font-weight: 500;
+      }
+      main .hero .container .img-container {
+        width: 40%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      main .container .img-container img {
+        width: 300px;
+        height: auto;
+        border-radius: 10px;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.749);
+        transition: all 0.3s ease-in-out;
+      }
+      .img-container img:hover {
+        transform: scale(1.1) translateX(-20px);
+      }
+      .img-details:hover {
+        transform: scale(1.1);
+      }
+      .img-details h1 {
+        font-size: 50px;
+        font-weight: 700;
+        margin-bottom: 10px;
+      }
+      .img-details h4 {
+        font-size: 30px;
+        font-weight: 700;
+        margin-bottom: 10px;
+      }
+      .hover-link {
+        color: #333;
+        transition: color 0.6s ease-in-out, text-shadow 0.3s ease;
+      }
+
+      .hover-link:hover {
+        color: #0f5b82;
+        text-shadow: 1px 1px 5px rgba(0, 123, 255, 0.5);
+      }
+    </style>
   </head>
-  <body class="bg-light">
+  <body>
     <%- include("includes/navbar.ejs") %>
     <main>
       <!-- Hero Section -->
       <section class="hero py-5">
         <div
-          class="container profile-container bg-white rounded-5 p-4"
+          class="container profile-container shadow-sm bg-light rounded-5 p-4"
           style="height: fit-content"
         >
-          <div class="row d-flex">
-            <div class="col-md-8"><h2>Profile Section</h2></div>
-            <div class="col-md-4 d-flex justify-content-end">
-              <a
-                href="/api/user/edit"
-                class="btn btn-outline-dark shadow-lg rounded-5 me-4 d-flex align-items-center"
-                >edit <i class="bi bi-pencil-square"></i
-              ></a>
-            </div>
+          <div class="row">
+            <h3>Profile Section</h3>
           </div>
           <div class="row body mt-4 align-items-center">
-            <div class="col-md-3 d-flex justify-content-center">
+            <div class="col-md-2 d-flex justify-content-center">
               <div
                 class="circle-img shadow-lg"
                 style="
-                  height: 200px;
-                  width: 200px;
+                  height: 150px;
+                  width: 150px;
                   border-radius: 50%;
                   overflow: hidden;
                 "
@@ -48,15 +100,14 @@
                   alt=""
                   height="100%"
                   width="100%"
-                  class="shadow-lg"
                   style="object-fit: cover; object-position: center"
                 />
               </div>
             </div>
-            <div class="col-md-9">
+            <div class="col-md-10">
               <div class="container">
                 <div class="row mb-3">
-                  <h2><%= user.name %></h2>
+                  <h3><%= user.name %></h3>
                 </div>
                 <div class="row">
                   <div class="col-md-4">
@@ -125,24 +176,6 @@
                   </h5>
                   <p class="card-text text-muted"><%= note.description %></p>
                 </div>
-                <div class="card-footer">
-                  <div class="d-flex justify-content-around">
-                    <button
-                      class="btn btn-light m-3"
-                      style="border-radius: 10px; width: 150px"
-                      onclick="updateClicked('<%= note._id %>')"
-                    >
-                      Update
-                    </button>
-                    <button
-                      class="btn btn-dark m-3"
-                      style="border-radius: 10px; width: 150px"
-                      onclick="deleteClicked('<%= note._id %>')"
-                    >
-                      Delete
-                    </button>
-                  </div>
-                </div>
               </div>
             </div>
             <% } %>
@@ -195,5 +228,11 @@
         }
       }
     </script>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"
+    ></script>
   </body>
 </html>

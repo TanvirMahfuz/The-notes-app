@@ -12,7 +12,7 @@ const pdfStorage = multer.diskStorage({
 });
 const imgStorage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, path.join(__dirname, "../static/images"));
+    cb(null, path.join(__dirname, "../static/profileImages"));
   },
   filename: function (req, file, cb) {
     cb(null, req.user._id + "-" + file.originalname);
@@ -20,5 +20,5 @@ const imgStorage = multer.diskStorage({
 });
 module.exports = {
   pdfUpload: multer({storage: pdfStorage}).single("doc"),
-  imageUpload: multer({storage: imgStorage}).single("img"),
+  imageUpload: multer({storage: imgStorage}).single("profileImage"),
 };

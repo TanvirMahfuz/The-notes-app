@@ -16,6 +16,15 @@ header nav ul {
   list-style: none;
   display: flex;
   justify-content: space-between;
+  align-items: center;
+}
+
+.search-btn:hover {
+  background-color: #0f5b82;
+}
+
+.search-box:focus {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 ul li {
   text-align: center;
@@ -31,12 +40,17 @@ ul li a {
   height: 30vh;
   margin-top: 20px;
   margin-bottom: 40px;
-  background-color: #8cbc6e;
+  background: linear-gradient(to right, #8cbc6e, #b2d42c);
 }
 #hero .container .t-text {
   display: flex;
 }
-
+#hero .container .t-text h1 {
+  margin-top: 15px;
+}
+#hero .container .t-text img {
+  margin-top: 15px;
+}
 #hero .container .einstein {
   outline: 5px;
   height: 220px;
@@ -44,12 +58,7 @@ ul li a {
   margin-left: 90%;
   margin-top: 0%;
 }
-/* #hero .container .feather {
-  outline: 5px;
-  height: 100px;
-  width: 100px;
-  margin-left: 50%;
-} */
+
 #text {
   font-size: 5em;
   color: #333;
@@ -59,64 +68,94 @@ ul li a {
 main {
   margin-bottom: 10px;
 }
-main .container {
+main .note-container {
   max-width: 70%;
   margin: auto;
   margin-bottom: 20px;
-  border: 1px solid black;
   border-radius: 10px;
   padding: 10px;
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  /* border: 1px solid #ccc; */
+  background: linear-gradient(to top right, #ffffff, #e0e0e0);
 }
-main .container .title {
+main .note-container .title {
   padding: 5px;
 }
-main .container .threads {
+main .note-container .threads {
   margin-left: 2%;
   max-height: 200px;
   overflow: scroll;
+}
+main .note-container .threads a {
+  color: #333;
+  text-decoration: none;
 }
 
-main .container .comments {
-  margin-left: 2%;
-  max-height: 200px;
-  overflow: scroll;
+main .note-container .comments {
+  /* background-color: #e7f0f4; */
+  border-radius: 10px;
+  padding: 10px;
+  max-height: 400px;
+  overflow: auto;
 }
-main .container .comments h4 {
-  font-weight: 500;
+
+main .note-container .comment {
+  margin: 0px auto;
+  margin-top: 10px;
+  max-height: 80px;
+  max-width: 90%;
+  overflow: auto;
+  border-left: #0f5b82 1px solid;
+  border-bottom: #0f5b82 2px solid;
+  background-color: white;
+  border-radius: 10px;
+}
+main .note-container .comment a {
+  text-decoration: none;
   color: #555454;
 }
-main .container .comments p {
+main .note-container .comment a:hover,
+main .note-container .threads a:hover {
+  text-decoration: underline;
+}
+main .note-container .comment h5 {
+  font-weight: 500;
+  color: #555454;
+  font-size: 18px;
+  margin-left: 1%;
+}
+main .note-container .comment p {
+  margin-left: 1%;
   font-weight: 400;
   font-size: 14px;
   color: #686666;
 }
-main .container .judgment {
+main .note-container .judgment {
   margin-left: 2%;
   margin-right: 2%;
   max-height: 200px;
   overflow: scroll;
 }
 
-main .container .judgment form p {
+main .note-container .judgment form p {
   font-weight: 400;
 }
-main .container .judgment .reactions {
+main .note-container .judgment .reactions {
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
 }
-main .container .judgment .reactions .left {
+main .note-container .judgment .reactions .left {
   width: 90%;
   text-align: center;
 }
-main .container .judgment .reactions .right {
+main .note-container .judgment .reactions .right {
   width: 10%;
   display: flex;
   justify-content: center;
 }
-main .container .judgment .reactions #comment {
+main .note-container .judgment .reactions #comment {
   padding: 10px;
   background-color: white;
   border: 1px solid #ddd;
@@ -126,12 +165,12 @@ main .container .judgment .reactions #comment {
   width: 100%;
 }
 
-main .container .judgment .reactions textarea {
+main .note-container .judgment .reactions textarea {
   font-size: 14px;
   resize: none;
   outline: none;
 }
-main .container .judgment .reactions .circle {
+main .note-container .judgment .reactions .circle {
   height: 45px;
   width: 45px;
   border-radius: 50%;
@@ -142,13 +181,13 @@ main .container .judgment .reactions .circle {
   transition: ease-in-out 250ms;
 }
 
-main .container .judgment .reactions .circle:hover {
+main .note-container .judgment .reactions .circle:hover {
   background-color: black;
 }
-main .container .judgment .reactions .circle i:hover {
+main .note-container .judgment .reactions .circle i:hover {
   color: white;
 }
-main .container .judgment .reactions button {
+main .note-container .judgment .reactions button {
   font-size: 35px;
   background: none;
   border: none;

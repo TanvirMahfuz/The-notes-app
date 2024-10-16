@@ -1,8 +1,9 @@
+require("dotenv").config();
 const mongoose = require("mongoose");
-const app = require("./src/app");
 
+const app = require("./src/app");
 mongoose
-  .connect("mongodb://localhost:27017/TheNotesApp")
+  .connect(process.env.MONGODB_URL)
   .then(() => {
     app.listen(3000, () => {
       console.log("server is running successfully");

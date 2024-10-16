@@ -1,7 +1,7 @@
 const {Router} = require("express");
+const {searchItem} = require("../controllers/search.controller.js");
 const homeRouter = Router();
 const Notes = require("../models/notes.model.js");
-const {isLoggedIn} = require("../middlewares/auth.middleware.js");
 homeRouter.get("/", async (req, res) => {
   const notes = await Notes.find({});
   if (!notes) {
@@ -9,4 +9,5 @@ homeRouter.get("/", async (req, res) => {
   }
   return res.render("home", {data: notes});
 });
+homeRouter.post("/search", searchItem);
 module.exports = homeRouter;

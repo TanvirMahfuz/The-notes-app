@@ -10,13 +10,25 @@
 
 header nav {
   padding: 20px;
-  background-color: aliceblue;
 }
 header nav ul {
   list-style: none;
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
+.search-dropdown:hover {
+  background-color: #ddd;
+}
+
+.search-btn:hover {
+  background-color: #0f5b82;
+}
+
+.search-box:focus {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
 ul li {
   text-align: center;
   display: inline-block;
@@ -33,10 +45,7 @@ ul li a {
   margin-top: 20px;
   margin-bottom: 40px;
   background-color: #555;
-  /* background-image: url("../images/pinknote.jpg");
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: right; */
+  background: linear-gradient(to bottom right, #4a90e2, #7b4397);
 }
 #hero .container h1 {
   font-size: 80px;
@@ -52,14 +61,11 @@ ul li a {
   width: 300px;
   margin-left: 88%;
   margin-top: -5%;
+  transition: all 0.5s ease-in-out;
 }
-/* #hero .container .feather {
-  outline: 5px;
-  height: 100px;
-  width: 100px;
-  margin-left: 50%;
-} */
-
+#hero .container .einstein:hover {
+  animation: linearCongruentialMotion 4s infinite;
+}
 #text {
   font-size: 5em;
   color: #333;
@@ -78,17 +84,28 @@ ul li a {
   height: 100%;
   margin-right: 0;
 }
+
 main .container {
   max-width: 70%;
   margin: auto;
   margin-bottom: 25px;
-  border: 1px solid black;
+
   border-radius: 10px;
   padding: 15px;
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  background: linear-gradient(to bottom right, #ffffff, #e0e0e0);
 }
 main .container .title {
   padding: 5px;
+}
+main .container .title a {
+  text-decoration: none;
+  color: #333;
+}
+main .container .title a:hover {
+  border-bottom: 2px solid #0f5b82;
+  color: #0f5b82;
+  text-shadow: 1px 1px 5px rgba(0, 123, 255, 0.5);
 }
 main .container .des {
   padding: 5px;
@@ -98,11 +115,29 @@ main .container .des {
 .additional-info ul {
   display: flex;
   align-items: center;
-
   padding: 3px;
   padding: 5px;
 }
 
-.additional-info .a i {
+.additional-info a i {
   font-size: 20px;
+}
+
+/* animations library */
+@keyframes linearCongruentialMotion {
+  0% {
+    transform: rotate(0);
+  }
+  25% {
+    transform: rotate(30deg);
+  }
+  50% {
+    transform: rotate(-30deg);
+  }
+  75% {
+    transform: rotate(30deg);
+  }
+  100% {
+    transform: rotate(-30deg);
+  }
 }

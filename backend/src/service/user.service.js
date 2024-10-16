@@ -15,6 +15,32 @@ const updateUserNote = async (email, noteId) => {
   }
 };
 
+const popNote = async (email, noteId) => {
+  try {
+    const user = await User.findOneAndUpdate(
+      {email: email},
+      {$pull: {notes: noteId}},
+      {new: true}
+    );
+    if (!user) return null;
+    return user;
+  } catch (error) {
+    console.log(error.message);
+    return null;
+  }
+};
+const getUserByEmail = async (email) => {
+  try {
+    const user = await User.findOne({email: email});
+    if (!user) return null;
+    return user;
+  } catch (error) {
+    console.log(error.message);
+    return null;
+  }
+};
 module.exports = {
   updateUserNote,
+  popNote,
+  getUserByEmail,
 };

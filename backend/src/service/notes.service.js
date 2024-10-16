@@ -1,5 +1,6 @@
 const Notes = require("../models/notes.model");
-
+const {popNote} = require("./user.service.js");
+const {matchName} = require("../utility/matchName.utility.js");
 const createNote = async (email, topic, description, fileName) => {
   const note = {
     name: topic,
@@ -10,7 +11,18 @@ const createNote = async (email, topic, description, fileName) => {
   };
   return await Notes.create(note);
 };
-const getNote = async (noteId) => {};
+
+const getNotesByName = async (noteName) => {
+  try {
+    let params = await Notes.find();
+    const notes = await matchName(noteName, params);
+    return notes;
+  } catch (err) {
+    console.error(err);
+    return [];
+  }
+};
+
 const storeComment = async (noteId, comment) => {
   return await Notes.findByIdAndUpdate(
     noteId,
@@ -55,10 +67,16 @@ const updateOneNote = async (req) => {
     return null;
   }
 };
-
+const eraseNote = async (noteId) => {
+  const publisher = await Notes.findById(noteId).select("publisher");
+  const user = await popNote(publisher.publisher, noteId);
+  if (!user) return null;
+  return await Notes.findByIdAndDelete(noteId, {new: true});
+};
 module.exports = {
   createNote,
-  getNote,
+  getNotesByName,
   storeComment,
   updateOneNote,
+  eraseNote,
 };

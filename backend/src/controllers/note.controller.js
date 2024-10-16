@@ -1,12 +1,12 @@
 const Notes = require("../models/notes.model");
-const path = require("path");
+
 const {updateUserNote} = require("../service/user.service.js");
-const {updateOneNote} = require("../service/notes.service.js");
+const {updateOneNote, eraseNote} = require("../service/notes.service.js");
 
 const storeComment = async (req, res) => {
   const {storeComment} = require("../service/notes.service.js");
   const note = await storeComment(req.body.noteId, {
-    commenterName: req.user.name,
+    commenterName: req.user.email,
     comment: req.body.comment,
   });
   if (!note) res.status(404).json({message: "note not found"});
@@ -71,4 +71,17 @@ const getEditPage = async (req, res) => {
   }
 };
 
-module.exports = {storeComment, getNote, createNote, updateNote, getEditPage};
+const removeNote = async (req, res) => {
+  const note = await eraseNote(req.query.id);
+  if (!note) return res.status(404).json({message: "note not found"});
+  return res.status(200).json({message: "note deleted"});
+};
+
+module.exports = {
+  storeComment,
+  getNote,
+  createNote,
+  updateNote,
+  getEditPage,
+  removeNote,
+};

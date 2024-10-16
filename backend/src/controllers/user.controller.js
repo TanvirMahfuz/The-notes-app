@@ -29,7 +29,6 @@ const register = async (req, res) => {
     return res
       .status(200)
       .cookie("publicKey", await savedUser.generateAccessToken())
-      .cookie("privateKey", savedUser.refToken)
       .redirect("/api/home");
   } catch (error) {
     console.error("Error while saving user:", error.message); // Log the error
@@ -57,11 +56,8 @@ const logIn = async (req, res) => {
     await user.save();
 
     const accToken = await user.generateAccessToken();
-    console.log(jwt.verify(accToken, "the secret of frankenstein"));
-    return res
-      .cookie("publicKey", accToken)
-      .cookie("privateKey", refreshToken)
-      .redirect("/api/home");
+    console.log(jwt.verify(accToken, process.env.ACCESS_TOKEN_SECRET));
+    return res.cookie("publicKey", accToken).redirect("/api/home");
   } catch (error) {
     console.error("Error during login:", error);
     return res.status(500).json({message: "Internal server error"});
@@ -70,7 +66,6 @@ const logIn = async (req, res) => {
 
 const logOut = async (req, res) => {
   res.clearCookie("publicKey");
-  res.clearCookie("privateKey");
   return res.redirect("/api/home");
 };
 module.exports = {logIn, register, logOut, profileView};
