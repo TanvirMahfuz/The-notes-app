@@ -12,13 +12,13 @@
     />
     <title>The notes APP</title>
   </head>
-  <body>
+  <body style="background-color: #e6f4f1a0">
     <%- include("includes/navbar.ejs") %>
     <main>
       <section id="hero">
-        <div class="container">
+        <div class="container rounded-4 p-3 shadow-lg">
           <div class="t-text">
-            <h1 id="text">The Notes APP</h1>
+            <h1 id="text" style="color: white">The Notes APP</h1>
             <img
               src="/images/feather-8290037_1280.png"
               alt=""
@@ -36,7 +36,7 @@
       </section>
 
       <% for (let note of data) { %>
-      <div class="container">
+      <div class="container shadow-lg rounded-4 p-3">
         <div class="title">
           <h2><a href="/api/notes/<%=note.name %>"><%= note.name %></a></h2>
         </div>

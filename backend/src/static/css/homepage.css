@@ -8,27 +8,6 @@
   transition: ease-in-out 250ms;
 }
 
-header nav {
-  padding: 20px;
-}
-header nav ul {
-  list-style: none;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.search-dropdown:hover {
-  background-color: #ddd;
-}
-
-.search-btn:hover {
-  background-color: #0f5b82;
-}
-
-.search-box:focus {
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-}
-
 ul li {
   text-align: center;
   display: inline-block;
@@ -45,7 +24,7 @@ ul li a {
   margin-top: 20px;
   margin-bottom: 40px;
   background-color: #555;
-  background: linear-gradient(to bottom right, #4a90e2, #7b4397);
+  background: linear-gradient(to bottom right, #325436, #283618);
 }
 #hero .container h1 {
   font-size: 80px;
@@ -93,7 +72,7 @@ main .container {
   border-radius: 10px;
   padding: 15px;
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-  background: linear-gradient(to bottom right, #ffffff, #e0e0e0);
+  background: linear-gradient(to bottom right, #fbfaf0, #fefae0);
 }
 main .container .title {
   padding: 5px;

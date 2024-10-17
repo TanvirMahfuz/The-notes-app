@@ -7,24 +7,8 @@
   font-family: "Raleway", sans-serif;
   transition: ease-in-out 250ms;
 }
-
-header nav {
-  padding: 20px;
-  background-color: aliceblue;
-}
-header nav ul {
-  list-style: none;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.search-btn:hover {
-  background-color: #0f5b82;
-}
-
-.search-box:focus {
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+body {
+  background-color: #e6f4f1a0;
 }
 ul li {
   text-align: center;
@@ -40,7 +24,8 @@ ul li a {
   height: 30vh;
   margin-top: 20px;
   margin-bottom: 40px;
-  background: linear-gradient(to right, #8cbc6e, #b2d42c);
+  /* background: linear-gradient(to bottom right, #08a699, #008bbd); */
+  background: linear-gradient(to bottom right, #325436, #283618);
 }
 #hero .container .t-text {
   display: flex;
@@ -76,7 +61,7 @@ main .note-container {
   padding: 10px;
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
   /* border: 1px solid #ccc; */
-  background: linear-gradient(to top right, #ffffff, #e0e0e0);
+  background: linear-gradient(to bottom right, #fbfaf0, #fefae0);
 }
 main .note-container .title {
   padding: 5px;
@@ -105,8 +90,8 @@ main .note-container .comment {
   max-height: 80px;
   max-width: 90%;
   overflow: auto;
-  border-left: #0f5b82 1px solid;
-  border-bottom: #0f5b82 2px solid;
+  border-left: #283618 1px solid;
+  border-bottom: #283618 2px solid;
   background-color: white;
   border-radius: 10px;
 }
@@ -131,8 +116,9 @@ main .note-container .comment p {
   color: #686666;
 }
 main .note-container .judgment {
-  margin-left: 2%;
-  margin-right: 2%;
+  width: 80%;
+  margin: 0px auto;
+  margin-top: 10px;
   max-height: 200px;
   overflow: scroll;
 }

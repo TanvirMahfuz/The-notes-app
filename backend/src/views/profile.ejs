@@ -13,21 +13,22 @@
     <title>Profile</title>
     <style></style>
   </head>
-  <body class="bg-light">
+  <body>
     <%- include("includes/navbar.ejs") %>
     <main>
       <!-- Hero Section -->
       <section class="hero py-5">
         <div
-          class="container profile-container bg-white rounded-5 p-4"
+          class="container profile-container rounded-5 p-4 pb-5 shadow-lg"
           style="height: fit-content"
         >
           <div class="row d-flex">
-            <div class="col-md-8"><h2>Profile Section</h2></div>
+            <div class="col-md-8"><h2>Your Profile</h2></div>
             <div class="col-md-4 d-flex justify-content-end">
               <a
                 href="/api/user/edit"
-                class="btn btn-outline-dark shadow-lg rounded-5 me-4 d-flex align-items-center"
+                class="btn btn-lg shadow-lg rounded-5 me-4 d-flex align-items-center text-white font-size-20"
+                style="background-color: #283618"
                 >edit <i class="bi bi-pencil-square"></i
               ></a>
             </div>
@@ -44,8 +45,8 @@
                 "
               >
                 <img
-                  src="/images/AAmishu.jpg"
-                  alt=""
+                  src="/profileImages/<%= user.profileImage %>"
+                  alt="Profile Image"
                   height="100%"
                   width="100%"
                   class="shadow-lg"
@@ -55,9 +56,7 @@
             </div>
             <div class="col-md-9">
               <div class="container">
-                <div class="row mb-3">
-                  <h2><%= user.name %></h2>
-                </div>
+                <div class="row mb-4"><h1><%= user.name %></h1></div>
                 <div class="row">
                   <div class="col-md-4">
                     <p>Email</p>
@@ -72,26 +71,29 @@
           <div class="row footer mt-5">
             <div class="col-md-3">
               <div
-                class="card py-2 px-4 bg-light shadow-sm rounded-4 d-flex justify-content-center align-items-center"
-                style="width: 70%; margin: 0px auto"
+                class="card footer-card py-2 px-4 shadow-sm rounded-4 d-flex justify-content-center align-items-center text-white"
+                style="width: 80%; margin: 0px auto; background-color: #283618"
               >
-                <h5><%= notes.length %></h5>
-                <p>Publications</p>
+                <h3><%= notes.length %></h3>
+                <h4>Publications</h4>
               </div>
             </div>
             <div class="col-md-3">
               <div
-                class="card bg-light py-2 px-4 shadow-sm rounded-4 d-flex justify-content-center align-items-center"
-                style="width: 70%; margin: 0px auto"
+                class="card footer-card py-2 px-4 shadow-sm rounded-4 d-flex justify-content-center align-items-center text-white"
+                style="width: 80%; margin: 0px auto; background-color: #283618"
               >
-                <h5>ratings</h5>
-                <p>ratings</p>
+                <h3>ratings</h3>
+                <h4>ratings</h4>
               </div>
             </div>
           </div>
         </div>
       </section>
 
+      <div class="container">
+        <h1>Publications</h1>
+      </div>
       <!-- Publications Section -->
       <section class="publications-container py-5">
         <div class="container">
@@ -104,39 +106,46 @@
             <div class="col-md-4">
               <div
                 style="
-                  background: linear-gradient(
-                    to bottom right,
-                    #ffffff,
-                    #e0e0e0
-                  );
+                  background-color: #fefae0;
                   border-radius: 10px;
-                  border: none;
+                  border: 1px solid #283618;
                 "
                 class="card mb-4 shadow-sm"
               >
-                <div class="card-body">
-                  <h5 class="card-title">
+                <div
+                  class="card-body overflow-auto shadow-lg"
+                  style="height: 150px"
+                >
+                  <h3 class="card-title">
                     <a
                       href="/api/notes/<%= note.name %>"
                       class="text-decoration-none hover-link"
                     >
                       <%= note.name %>
                     </a>
-                  </h5>
+                  </h3>
                   <p class="card-text text-muted"><%= note.description %></p>
                 </div>
-                <div class="card-footer">
+                <div class="card-footer" style="background-color: #283618">
                   <div class="d-flex justify-content-around">
                     <button
-                      class="btn btn-light m-3"
-                      style="border-radius: 10px; width: 150px"
+                      class="btn m-3"
+                      style="
+                        border-radius: 10px;
+                        width: 150px;
+                        background-color: #dda15e;
+                      "
                       onclick="updateClicked('<%= note._id %>')"
                     >
                       Update
                     </button>
                     <button
                       class="btn btn-dark m-3"
-                      style="border-radius: 10px; width: 150px"
+                      style="
+                        border-radius: 10px;
+                        width: 150px;
+                        background-color: #bc6c25;
+                      "
                       onclick="deleteClicked('<%= note._id %>')"
                     >
                       Delete

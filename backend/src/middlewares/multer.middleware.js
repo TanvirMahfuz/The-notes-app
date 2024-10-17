@@ -12,6 +12,7 @@ const pdfStorage = multer.diskStorage({
 });
 const imgStorage = multer.diskStorage({
   destination: function (req, file, cb) {
+    console.log("Middleware reached(image)");
     cb(null, path.join(__dirname, "../static/profileImages"));
   },
   filename: function (req, file, cb) {

@@ -21,45 +21,15 @@
         transition: ease-in-out 250ms;
       }
 
-      main .hero .container .img-details {
-        width: 60%;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
+      ul li {
+        text-align: center;
+        display: inline-block;
+        margin: 0px 5px;
       }
-      main .hero .container .img-details h4 {
-        font-weight: 500;
-      }
-      main .hero .container .img-container {
-        width: 40%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-      }
-
-      main .container .img-container img {
-        width: 300px;
-        height: auto;
-        border-radius: 10px;
-        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.749);
-        transition: all 0.3s ease-in-out;
-      }
-      .img-container img:hover {
-        transform: scale(1.1) translateX(-20px);
-      }
-      .img-details:hover {
-        transform: scale(1.1);
-      }
-      .img-details h1 {
-        font-size: 50px;
-        font-weight: 700;
-        margin-bottom: 10px;
-      }
-      .img-details h4 {
-        font-size: 30px;
-        font-weight: 700;
-        margin-bottom: 10px;
+      ul li a {
+        text-decoration: none;
+        color: black;
+        padding: 10px;
       }
       .hover-link {
         color: #333;
@@ -72,26 +42,27 @@
       }
     </style>
   </head>
-  <body>
+  <body style="background-color: #e6f4f1a0">
     <%- include("includes/navbar.ejs") %>
     <main>
       <!-- Hero Section -->
-      <section class="hero py-5">
+      <section class="hero py-5 m-2">
         <div
-          class="container profile-container shadow-sm bg-light rounded-5 p-4"
-          style="height: fit-content"
+          class="container profile-container rounded-5 p-4 shadow-lg gy-5"
+          style="height: fit-content; background-color: #fefae0"
         >
-          <div class="row">
-            <h3>Profile Section</h3>
+          <div class="row d-flex">
+            <div class="col-md-8"><h2>Publisher's Profile</h2></div>
           </div>
           <div class="row body mt-4 align-items-center">
-            <div class="col-md-2 d-flex justify-content-center">
+            <div class="col-md-3 d-flex justify-content-center">
               <div
                 class="circle-img shadow-lg"
                 style="
-                  height: 150px;
-                  width: 150px;
+                  height: 200px;
+                  width: 200px;
                   border-radius: 50%;
+                  border: 5px solid #283618;
                   overflow: hidden;
                 "
               >
@@ -100,15 +71,14 @@
                   alt=""
                   height="100%"
                   width="100%"
+                  class="shadow-lg"
                   style="object-fit: cover; object-position: center"
                 />
               </div>
             </div>
-            <div class="col-md-10">
+            <div class="col-md-9">
               <div class="container">
-                <div class="row mb-3">
-                  <h3><%= user.name %></h3>
-                </div>
+                <div class="row mb-4"><h1><%= user.name %></h1></div>
                 <div class="row">
                   <div class="col-md-4">
                     <p>Email</p>
@@ -123,26 +93,28 @@
           <div class="row footer mt-5">
             <div class="col-md-3">
               <div
-                class="card py-2 px-4 bg-light shadow-sm rounded-4 d-flex justify-content-center align-items-center"
-                style="width: 70%; margin: 0px auto"
+                class="card footer-card py-2 px-4 shadow-sm rounded-4 d-flex justify-content-center align-items-center text-white"
+                style="width: 80%; margin: 0px auto; background-color: #283618"
               >
-                <h5><%= notes.length %></h5>
-                <p>Publications</p>
+                <h3><%= notes.length %></h3>
+                <h4>Publications</h4>
               </div>
             </div>
             <div class="col-md-3">
               <div
-                class="card bg-light py-2 px-4 shadow-sm rounded-4 d-flex justify-content-center align-items-center"
-                style="width: 70%; margin: 0px auto"
+                class="card footer-card py-2 px-4 shadow-sm rounded-4 d-flex justify-content-center align-items-center text-white"
+                style="width: 80%; margin: 0px auto; background-color: #283618"
               >
-                <h5>ratings</h5>
-                <p>ratings</p>
+                <h3>ratings</h3>
+                <h4>ratings</h4>
               </div>
             </div>
           </div>
         </div>
       </section>
-
+      <div class="container">
+        <h1>Publications</h1>
+      </div>
       <!-- Publications Section -->
       <section class="publications-container py-5">
         <div class="container">
@@ -155,25 +127,24 @@
             <div class="col-md-4">
               <div
                 style="
-                  background: linear-gradient(
-                    to bottom right,
-                    #ffffff,
-                    #e0e0e0
-                  );
+                  background-color: #fefae0;
                   border-radius: 10px;
-                  border: none;
+                  border: 1px solid #283618;
                 "
-                class="card mb-4 shadow-sm"
+                class="card mb-4 shadow-lg"
               >
-                <div class="card-body">
-                  <h5 class="card-title">
+                <div
+                  class="card-body overflow-auto shadow-lg"
+                  style="height: 150px"
+                >
+                  <h3 class="card-title">
                     <a
                       href="/api/notes/<%= note.name %>"
                       class="text-decoration-none hover-link"
                     >
                       <%= note.name %>
                     </a>
-                  </h5>
+                  </h3>
                   <p class="card-text text-muted"><%= note.description %></p>
                 </div>
               </div>

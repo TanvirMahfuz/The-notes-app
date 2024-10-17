@@ -6,6 +6,10 @@ const searchItem = async (req, res) => {
     const {searchParam, searchValue} = req.body;
     if (searchParam === "topic") {
     } else if (searchParam === "email") {
+      const user = await getUserByEmail(searchValue);
+      if (!user) {
+        return res.redirect("/api/home");
+      }
       return res.redirect(
         `/api/discussion/publisher?user=${searchValue.trim()}`
       );
