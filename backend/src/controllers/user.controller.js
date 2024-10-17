@@ -13,6 +13,11 @@ const profileView = async (req, res) => {
   } catch (error) {
     console.error(error.message);
   }
+  if (req.cookies["publicKey"]) {
+    return res
+      .cookie("publicKey", req.cookies["publicKey"])
+      .render("profile", {user: req.user, notes});
+  }
   return res.render("profile", {user: req.user, notes});
 };
 
@@ -74,6 +79,7 @@ const logIn = async (req, res) => {
 
     const accToken = await user.generateAccessToken();
     console.log(jwt.verify(accToken, process.env.ACCESS_TOKEN_SECRET));
+
     return res.cookie("publicKey", accToken).redirect("/api/home");
   } catch (error) {
     console.error("Error during login:", error);
@@ -82,8 +88,24 @@ const logIn = async (req, res) => {
 };
 
 const logOut = async (req, res) => {
-  res.clearCookie("publicKey");
-  return res.redirect("/api/home");
+  try {
+    const user = await User.findOneAndUpdate(
+      {email: req.user.email},
+      {refToken: ""},
+      {new: true}
+    );
+
+    if (!user) {
+      return res.status(404).json({message: "User not found"});
+    }
+
+    res.clearCookie("publicKey", {httpOnly: true, sameSite: "Strict"});
+
+    return res.redirect("/api/home");
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({message: "Internal server error"});
+  }
 };
 
 const updateUser = async (req, res) => {

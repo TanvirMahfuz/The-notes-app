@@ -32,11 +32,11 @@ const userSchema = new mongoose.Schema(
   {timestamps: true}
 );
 userSchema.pre("save", async function (next) {
-  if (!this.isModified("password")) {
-    return next();
+  if (this.isModified("password")) {
+    const salt = await bcrypt.genSalt(10);
+    this.password = await bcrypt.hash(this.password, salt);
   }
-  const salt = await bcrypt.genSalt(10);
-  this.password = await bcrypt.hash(this.password, salt);
+  const reftoken = this.generateRefreshToken();
   next();
 });
 userSchema.methods.generateRefreshToken = async function () {
@@ -47,6 +47,7 @@ userSchema.methods.generateRefreshToken = async function () {
       expiresIn: process.env.REFRESH_TOKEN_EXPIRE_TIME,
     }
   );
+  return this.refToken;
 };
 userSchema.methods.generateAccessToken = async function () {
   return await jwt.sign(

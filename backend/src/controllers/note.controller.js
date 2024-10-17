@@ -63,7 +63,11 @@ const getEditPage = async (req, res) => {
       return res.status(404).json({message: "Note not found"});
     }
 
-    // Pass the note to the EJS template
+    if (req.cookies["publicKey"]) {
+      return res
+        .cookie("publicKey", req.cookies["publicKey"])
+        .render("updateNotes", {note: note});
+    }
     return res.render("updateNotes", {note: note});
   } catch (error) {
     console.error("Error fetching note:", error);

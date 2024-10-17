@@ -5,68 +5,38 @@ const Notes = require("../models/notes.model.js");
 const isLoggedIn = async (req, res, next) => {
   console.log("middleware reached");
   const accToken = req.cookies["publicKey"];
-
+  console.log(accToken);
   if (!accToken) {
-    console.log("No access token provided");
-    return res.status(401).redirect("/api/user/log-in");
+    return res.redirect("/api/user/log-in");
   }
-
-  let tem = await jwt.verify(accToken, process.env.ACCESS_TOKEN_SECRET);
-  console.log("tem:", tem);
-
-  const decoded = await jwt.verify(accToken, process.env.ACCESS_TOKEN_SECRET);
-  const currentTime = Date.now();
-  const tokenExpiration = decoded ? decoded.exp * 1000 : 0;
   try {
-    if (!decoded || tokenExpiration < currentTime) {
-      console.log("Token expired or invalid");
-      res.clearCookie("privateKey");
-      return res.status(401).redirect("/api/user/log-in");
-    }
-    console.log(tokenExpiration - currentTime);
+    const decoded = jwt.verify(accToken, process.env.ACCESS_TOKEN_SECRET);
+    const user = await User.findOne({email: decoded.email});
 
-    if (tokenExpiration - currentTime < 30 * 60 * 1000) {
-      const user = await User.findOne({email: decoded.email});
-      if (!user) {
-        console.log("Invalid refresh token or user not found");
-        return res.status(401).redirect("/api/user/log-in");
-      }
-      if (user.refToken !== "") {
-        try {
-          const ver = await jwt.verify(
-            user.refToken,
-            process.env.REFRESH_TOKEN_SECRET
-          );
-          const newAccToken = user.generateAccessToken();
-          user.refToken = user.generateRefreshToken();
-          res.cookie("publicKey", newAccToken, {httpOnly: true});
-          console.log("New access token issued");
-        } catch (error) {
-          console.log("Error:", error.message);
-          res.redirect("/api/user/log-in");
-        }
-      } else {
-        console.log("No refresh token found");
-        return res.status(401).redirect("/api/user/log-in");
+    const currentTime = Date.now();
+    console.log(decoded.exp * 1000 - currentTime);
+    if (decoded.exp * 1000 - currentTime < 3 * 60 * 1000) {
+      try {
+        const verRef = jwt.verify(
+          user.refToken,
+          process.env.REFRESH_TOKEN_SECRET
+        );
+        const newAccToken = await user.generateAccessToken();
+        console.log(newAccToken);
+        console.log("\nthe url: ", req.url);
+        req.cookies["publicKey"] = newAccToken;
+        console.log(req.cookies["publicKey"]);
+      } catch (err) {
+        console.log("error in the 2nd try block", err.message);
+        return res.redirect("/api/user/log-in");
       }
     }
 
-    const verifiedDecoded = jwt.verify(
-      accToken,
-      process.env.ACCESS_TOKEN_SECRET
-    );
-
-    const userExists = await User.findOne({email: verifiedDecoded.email});
-    if (!userExists) {
-      console.log("User not found");
-      return res.status(401).redirect("/api/user/register");
-    }
-
-    req.user = userExists;
+    req.user = user;
     next();
-  } catch (err) {
-    console.log("Error:", err.message);
-    return res.status(401).redirect("/api/user/register");
+  } catch (error) {
+    console.log("error is in the first try block: ", error.message);
+    return res.redirect("/api/user/log-in");
   }
 };
 
@@ -85,3 +55,7 @@ const isOwner = async (req, res, next) => {
   next();
 };
 module.exports = {isLoggedIn, isOwner};
+
+//eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IndoYXRldmVyQGdtYWlsLmNvbSIsImlhdCI6MTcyOTEzNjUzMiwiZXhwIjoxNzI5MjE5MzMyfQ.pYnLWTOl1dveB3KNAE2Yxj4lpxqjvm-b8fccfGGM-f8
+
+//eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IndoYXRldmVyQGdtYWlsLmNvbSIsImlhdCI6MTcyOTEzNjUzMiwiZXhwIjoxNzI5MjE5MzMyfQ.pYnLWTOl1dveB3KNAE2Yxj4lpxqjvm-b8fccfGGM-f8
