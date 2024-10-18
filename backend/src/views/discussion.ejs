@@ -35,7 +35,15 @@
       <section id="Notes">
         <% for (let note of data) { %>
         <div class="note-container mt-4 shadow-lg rounded-5 p-4">
-          <h2 class="title"><%= note.name %></h2>
+          <div class="d-flex align-items-center justify-content-start">
+            <h2 class="title"><%= note.name %></h2>
+            <a
+              href="/pdf/<%=note.attachedPdf %>"
+              target="_blank"
+              class="text-decoration-none text-dark ms-2"
+              ><h3><i class="bi bi-file-earmark-pdf-fill"></i></h3
+            ></a>
+          </div>
           <div class="threads">
             <a
               href="/api/discussion/publisher?user=<%= encodeURIComponent(note.publisher) %>"

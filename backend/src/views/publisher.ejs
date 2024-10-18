@@ -67,7 +67,7 @@
                 "
               >
                 <img
-                  src="/images/AAmishu.jpg"
+                  src="/images/<%user.profileImage %>"
                   alt=""
                   height="100%"
                   width="100%"
@@ -81,11 +81,18 @@
                 <div class="row mb-4"><h1><%= user.name %></h1></div>
                 <div class="row">
                   <div class="col-md-4">
+                    <p>Designation</p>
+                    <h4><%= user.designation %></h4>
+                  </div>
+                  <div class="col-md-4" style="overflow-wrap: break-word">
                     <p>Email</p>
                     <h4><%= user.email %></h4>
                   </div>
-                  <div class="col-md-4">Phone</div>
-                  <div class="col-md-4">Social</div>
+
+                  <div class="col-md-4" style="overflow-wrap: break-word">
+                    <p>Github</p>
+                    <h4><%= user.github %></h4>
+                  </div>
                 </div>
               </div>
             </div>

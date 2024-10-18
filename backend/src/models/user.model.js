@@ -19,6 +19,15 @@ const userSchema = new mongoose.Schema(
       type: String,
       default: "Portrait_Placeholder.png",
     },
+    designation: {
+      type: String,
+    },
+    emoji: {
+      type: String,
+    },
+    github: {
+      type: String,
+    },
     notes: [
       {
         type: mongoose.Schema.Types.ObjectId,

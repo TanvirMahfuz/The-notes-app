@@ -40,7 +40,7 @@
         action="/api/user/edit"
         method="post"
         enctype="multipart/form-data"
-        class="w-100 p-5 border shadow-lg rounded-5 bg-white"
+        class="w-100 p-5 mb-4 border shadow-lg rounded-5 bg-white"
       >
         <!-- Name -->
         <div class="mb-3">
@@ -75,6 +75,29 @@
             id="image"
             name="profileImage"
             accept="image/*"
+          />
+        </div>
+        <!-- designation -->
+        <div class="mb-3">
+          <label for="designation" class="form-label">designation</label>
+          <input
+            type="text"
+            class="form-control form-control-lg"
+            id="designation"
+            name="designation"
+            value="<%= user.designation %>"
+          />
+        </div>
+
+        <!-- github -->
+        <div class="mb-3">
+          <label for="github" class="form-label">github</label>
+          <input
+            type="text"
+            class="form-control form-control-lg"
+            id="github"
+            name="github"
+            value="<%= user.github %>"
           />
         </div>
 
@@ -127,7 +150,7 @@
         <div class="w-100 text-center">
           <button
             type="submit"
-            class="btn btn-dark"
+            class="btn btn-lg btn-dark rounded-4"
             style="margin: 0px auto; margin-top: 15px"
           >
             Save Changes

@@ -15,7 +15,7 @@ const isLoggedIn = async (req, res, next) => {
 
     const currentTime = Date.now();
     console.log(decoded.exp * 1000 - currentTime);
-    if (decoded.exp * 1000 - currentTime < 3 * 60 * 1000) {
+    if (decoded.exp * 1000 - currentTime < 20 * 60 * 1000) {
       try {
         const verRef = jwt.verify(
           user.refToken,
@@ -55,7 +55,3 @@ const isOwner = async (req, res, next) => {
   next();
 };
 module.exports = {isLoggedIn, isOwner};
-
-//eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IndoYXRldmVyQGdtYWlsLmNvbSIsImlhdCI6MTcyOTEzNjUzMiwiZXhwIjoxNzI5MjE5MzMyfQ.pYnLWTOl1dveB3KNAE2Yxj4lpxqjvm-b8fccfGGM-f8
-
-//eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IndoYXRldmVyQGdtYWlsLmNvbSIsImlhdCI6MTcyOTEzNjUzMiwiZXhwIjoxNzI5MjE5MzMyfQ.pYnLWTOl1dveB3KNAE2Yxj4lpxqjvm-b8fccfGGM-f8

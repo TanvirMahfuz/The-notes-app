@@ -109,7 +109,8 @@ const logOut = async (req, res) => {
 };
 
 const updateUser = async (req, res) => {
-  let {name, email, password, confirmPassword} = req.body;
+  let {name, email, password, confirmPassword, designation, emoji, github} =
+    req.body;
   const fileName = req.file?.filename;
   console.log(req.body, fileName);
   let passwordChanged = false;
@@ -125,6 +126,9 @@ const updateUser = async (req, res) => {
   let data = {
     name,
     email,
+    designation,
+    emoji,
+    github,
   };
   if (fileName) {
     data.profileImage = fileName;

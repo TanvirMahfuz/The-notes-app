@@ -16,11 +16,14 @@ const storeComment = async (req, res) => {
 const getNote = async (req, res) => {
   try {
     const note = await Notes.find({name: req.params.name});
+    console.log("notes : ", req.params.name);
+    console.log(note);
     if (!note) res.status(404).json({message: "note not found"});
-    res.render("discussion", {data: note});
+
+    return res.render("discussion", {data: note});
   } catch (error) {
     console.log(error.message);
-    res.status(500).json({message: "internal server error"});
+    return res.status(500).json({message: "internal server error"});
   }
 };
 
@@ -31,7 +34,7 @@ const createNote = async (req, res) => {
     const fileName = req.file?.filename;
     const newNote = await createNote(
       req.user.email,
-      topic,
+      topic.trim(),
       description,
       fileName
     );

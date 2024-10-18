@@ -59,11 +59,18 @@
                 <div class="row mb-4"><h1><%= user.name %></h1></div>
                 <div class="row">
                   <div class="col-md-4">
+                    <p>Designation</p>
+                    <h4><%= user.designation %></h4>
+                  </div>
+                  <div class="col-md-4" style="overflow-wrap: break-word">
                     <p>Email</p>
                     <h4><%= user.email %></h4>
                   </div>
-                  <div class="col-md-4">Phone</div>
-                  <div class="col-md-4">Social</div>
+
+                  <div class="col-md-4" style="overflow-wrap: break-word">
+                    <p>Github</p>
+                    <h4><%= user.github %></h4>
+                  </div>
                 </div>
               </div>
             </div>
@@ -83,7 +90,7 @@
                 class="card footer-card py-2 px-4 shadow-sm rounded-4 d-flex justify-content-center align-items-center text-white"
                 style="width: 80%; margin: 0px auto; background-color: #283618"
               >
-                <h3>ratings</h3>
+                <h3>0</h3>
                 <h4>ratings</h4>
               </div>
             </div>
