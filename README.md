@@ -1,7 +1,9 @@
 **Backend Setup**
 
 **install node.js**
+
 **install mongodb**
+
 **install git**
 
 **Clone the repository:**
