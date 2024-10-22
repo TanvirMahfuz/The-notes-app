@@ -14,8 +14,10 @@ const createNote = async (email, topic, description, fileName) => {
 
 const getNotesByName = async (noteName) => {
   try {
-    let params = await Notes.find();
-    const notes = await matchName(noteName, params);
+    let notes = await Notes.find({
+      name: {$regex: noteName, $options: "i"},
+    });
+    // const notes = await matchName(noteName, params);
     return notes;
   } catch (err) {
     console.error(err);
