@@ -35,7 +35,7 @@ const getUserEditPage = async (req, res) => {
 
 const register = async (req, res) => {
   const {name, email, password, confirmPassword} = req.body;
-  console.log(req.body);
+  console.log(password.toString());
   if (password !== confirmPassword) {
     return res.status(400).json({message: "Password does not match"});
   }
@@ -68,7 +68,7 @@ const logIn = async (req, res) => {
       return res.status(404).json({message: "User not found"});
     }
 
-    const isMatch = await user.comparePassword(password);
+    const isMatch = await user.comparePassword(password.toString());
     if (!isMatch) {
       return res.status(403).json("Password did not match");
     }
