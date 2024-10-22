@@ -16,6 +16,7 @@ git clone https://github.com/TanvirMahfuz/The-notes-app.git
 **Navigate to the project directory:**
 
 ```bash
+cd The-notes-app
 cd backend
 ```
 
