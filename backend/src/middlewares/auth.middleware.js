@@ -14,7 +14,7 @@ const isLoggedIn = async (req, res, next) => {
     const user = await User.findOne({email: decoded.email});
 
     const currentTime = Date.now();
-    console.log(decoded.exp * 1000 - currentTime);
+
     if (decoded.exp * 1000 - currentTime < 20 * 60 * 1000) {
       try {
         const verRef = jwt.verify(
@@ -22,8 +22,6 @@ const isLoggedIn = async (req, res, next) => {
           process.env.REFRESH_TOKEN_SECRET
         );
         const newAccToken = await user.generateAccessToken();
-        console.log(newAccToken);
-        console.log("\nthe url: ", req.url);
         req.cookies["publicKey"] = newAccToken;
         console.log(req.cookies["publicKey"]);
       } catch (err) {

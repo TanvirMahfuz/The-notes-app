@@ -112,7 +112,6 @@ const updateUser = async (req, res) => {
   let {name, email, password, confirmPassword, designation, emoji, github} =
     req.body;
   const fileName = req.file?.filename;
-  console.log(req.body, fileName);
   let passwordChanged = false;
   if (password != "") {
     password = password.trim();
@@ -140,10 +139,10 @@ const updateUser = async (req, res) => {
   if (!user) {
     return res.status(404).json({message: "User not found"});
   }
-  console.log(user);
+
   if (passwordChanged) {
     res.clearCookie("publicKey");
-    return res.redirect("/api/user/login");
+    return res.redirect("/api/user/log-in");
   }
   return res.redirect("/api/user/");
 };

@@ -41,13 +41,16 @@ const userSchema = new mongoose.Schema(
   {timestamps: true}
 );
 userSchema.pre("save", async function (next) {
+  console.log("this is presave");
   if (this.isModified("password")) {
+    console.log("password was changed");
     const salt = await bcrypt.genSalt(10);
     this.password = await bcrypt.hash(this.password, salt);
   }
   const reftoken = this.generateRefreshToken();
   next();
 });
+
 userSchema.methods.generateRefreshToken = async function () {
   this.refToken = await jwt.sign(
     {email: this.email},

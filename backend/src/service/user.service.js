@@ -1,5 +1,5 @@
 const User = require("../models/user.model.js");
-
+const bcrypt = require("bcryptjs");
 const updateUserNote = async (email, noteId) => {
   try {
     const user = await User.findOneAndUpdate(
@@ -41,11 +41,15 @@ const getUserByEmail = async (email) => {
 };
 const updateUserByEmail = async (email, data) => {
   try {
-    console.log(data);
     const user = await User.findOneAndUpdate({email: email}, data, {
       new: true,
     });
+    if (data.password) {
+      const salt = await bcrypt.genSalt(10);
+      data.password = await bcrypt.hash(data.password, salt);
+    }
     if (!user) return null;
+    console.log(user);
     return user;
   } catch (error) {
     console.log(error.message);
